@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Title>AspNetCore.SwaggerUI</Title>
+    <Authors>Maxime Degallaix</Authors>
+    <Description>
+Provide a middleware to expose a custom version of Swagger UI.
+
+This is an .Net integration of the following swagger-ui (modified):
+https://github.com/jensoleg/swagger-ui
+    </Description>
+    <RepositoryUrl>https://github.com/MaxDeg/AspNetCore.SwaggerUI</RepositoryUrl>
+    <IsPackable>True</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="AspNetCore.SwaggerUI.fs" />
+    <None Include="Script.fsx" />
+  </ItemGroup>
+  
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

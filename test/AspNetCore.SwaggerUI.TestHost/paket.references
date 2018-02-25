@@ -1,0 +1,6 @@
+group Test
+Microsoft.AspNetCore.Server.Kestrel
+Microsoft.Extensions.Logging.Console
+Microsoft.Extensions.Logging.Debug
+Giraffe
+YamlDotNet
