@@ -1,15 +1,12 @@
-source https://www.nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 storage: none
-framework: auto-detect
 
-nuget FSharp.Core
 nuget Microsoft.AspNetCore.StaticFiles
 nuget Microsoft.Extensions.FileProviders.Embedded
 
 group Test
-  source https://www.nuget.org/api/v2
+  source https://api.nuget.org/v3/index.json
   storage: none
-  framework: auto-detect
   
   clitool dotnet-xunit
 
@@ -21,7 +18,6 @@ group Test
   nuget YamlDotNet
 
 group Build
-  source https://www.nuget.org/api/v2
-  framework: auto-detect
+  source https://api.nuget.org/v3/index.json
 
   nuget FAKE

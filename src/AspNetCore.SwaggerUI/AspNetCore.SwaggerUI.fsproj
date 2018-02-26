@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Title>AspNetCore.SwaggerUI</Title>
     <Authors>Maxime Degallaix</Authors>
     <Description>
@@ -25,7 +25,6 @@ https://github.com/jensoleg/swagger-ui
 
   <ItemGroup>
     <Compile Include="AspNetCore.SwaggerUI.fs" />
-    <None Include="Script.fsx" />
   </ItemGroup>
   
   <Import Project="..\..\.paket\Paket.Restore.targets" />

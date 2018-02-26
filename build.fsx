@@ -13,7 +13,6 @@ open System
 
 let apiKey = getBuildParamOrDefault "nugetApiKey" ""
 
-let buildDir  = "./build/"
 let appReferences = !! "/**/*.fsproj"
 let dotnetcliVersion = "2.1.4"
 let mutable dotnetExePath = "dotnet"
@@ -46,7 +45,17 @@ let runDotnet workingDir args =
 // --------------------------------------------------------------------------------------
 
 Target "Clean" <| fun _ ->
-  CleanDirs [buildDir]
+  !! "**/bin"
+  ++ "**/obj"
+  ++ "**/build"
+  -- "packages/build/**"
+  |> Seq.iter CleanDir
+
+  appReferences
+  |> Seq.iter (fun p ->
+    let dir = System.IO.Path.GetDirectoryName p
+    runDotnet dir "clean"
+  )
 
 
 Target "InstallDotNetCLI" <| fun _ ->
@@ -77,7 +86,7 @@ Target "Package" <| fun _ ->
   )
 
 Target "Push" <| fun _ ->
-  !! "src/**/*.nupkg"
+  !! "src/**/build/*.nupkg"
   |> Seq.iter (fun p ->
     let dir = System.IO.Path.GetDirectoryName p
 
@@ -85,7 +94,7 @@ Target "Push" <| fun _ ->
     |> runDotnet dir
   )
 
-Target "PublishAndPush" ignore
+Target "PackageAndPush" ignore
 
 // --------------------------------------------------------------------------------------
 // Build order
@@ -101,6 +110,6 @@ Target "PublishAndPush" ignore
   ==> "Restore"
   ==> "Package"
   =?> ("Push", not <| String.IsNullOrWhiteSpace apiKey)
-  ==> "PublishAndPush"
+  ==> "PackageAndPush"
 
 RunTargetOrDefault "Build"
